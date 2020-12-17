@@ -1,0 +1,103 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F6F8FF;
+}
+.email-input {
+    --text: #648c85;
+    --text-valid: rgb(96, 103, 100);
+    --text-invalid:#F04949;
+    --text-placeholder: #BBC1E1;
+    --image: #A6ACCD;
+    --image-Hover: #10cbb8;
+    --image-invalid: #F04949;
+    --image-valid: #16BF78;
+    --background: #fff;
+    --border: #D1D6EE;
+    --border-hover: #A6ACCD;
+    --border-invalid:#F04949;
+    --border-valid:#16BF78;
+    --shadow-valid: #{rgba(rgb(103, 189, 103), .32)};
+    position: relative;
+    max-width: 150px;
+    input {
+        width: 100%;
+        outline: none;
+        display: block;
+        font-size: 16px;
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0;
+        padding: 8px 16px 8px 41px;
+        line-height: 26px;
+        border-radius: 10px;
+        color: var(--text);
+        border: 1px solid var(--bc, var(--border));
+        background: var(--background);
+        transition: all .7s;
+        &::placeholder {
+            color: var(--text-placeholder);
+        }
+    }
+    svg {
+        width: 20px;
+        height: 20px;
+        top: 12px;
+        left: 12px;
+        display: block;
+        position: absolute;
+        fill: none;
+        stroke: var(--i, var(--image));
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.6;
+        transition: all .7s; /*transition when the mouse over*/Y
+        path {
+            stroke-dasharray: 80;
+            stroke-dashoffset: var(--path, 170);
+            transition: stroke-dashoffset 1.5s ease var(--path-delay, .3s);
+        }
+        polyline {
+            stroke-dasharray: 20;
+            stroke-dashoffset: var(--tick, 20);
+            transition: stroke-dashoffset .45s ease var(--tick-delay, 0s);
+        }
+    }
+    &:hover {
+        --bc: var(--border-hover);
+        input {
+            transform: scale(1.05);
+            transition: transform 1s;
+            & + svg {
+                transform: scale(1.1) translate(-5px);
+                stroke: var(--image-Hover);
+                transition: transform 1s;
+            }
+        }
+    }
+    &:not(.valid) {
+        input {
+            color: var(--text-invalid);
+            &:not(:placeholder-shown) {
+                &:not(:focus) {
+                    & + svg {
+                        --i: var(--image-invalid);
+                    }
+                }
+            }
+        }
+    }
+    &.valid {
+        input {
+        border: 1px solid var(--border-valid);
+        border-radius: 6px;
+        box-shadow: 0 1px 6px -1px var(--shadow-valid);
+        color: var(--text-valid);}
+        --i: var(--image-valid);
+        --path: 120;
+        --path-delay: 0s;
+        --tick: 0;
+        --tick-delay: .5s;
+    }
+}
